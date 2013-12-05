@@ -1,0 +1,77 @@
+/**
+ * Ext.ux.grid.RowActions.css 
+ *
+ * Style sheets for Grid RowActions Plugin
+ */
+
+/* styles for rows */
+.ux-row-action-cell .x-grid-cell-inner {
+    padding:1px 0 0 0;
+}
+.ux-row-action-item {
+    float:left;
+    min-width:16px;
+    height:16px;
+    background-repeat:no-repeat;
+    margin: 0 5px 0 0;
+    cursor:pointer;
+    overflow:hidden;
+}
+.x-ie .ux-row-action-item {
+    width:16px;
+}
+.x-ie .ux-row-action-text {
+    width:auto;
+}
+.ux-row-action-item span {
+    vertical-align:middle;
+    padding:0 0 0 20px;
+    line-height:18px;
+}
+.x-ie .ux-row-action-item span {
+    width:auto;
+}
+
+/* styles for groups */
+.x-grid-group-hd div {
+    position:relative;
+    height: 32px;
+}
+
+.ux-grow-action-item {
+    min-width:16px;
+    height: 16px;
+    background-repeat:no-repeat;
+    background-position: 0 0 ! important;
+    margin: 0 0 0 4px;
+    padding: 0 ! important;
+    cursor:pointer;
+    float:left;
+}
+.x-ie .ux-grow-action-item {
+    width:16px;
+}
+.ux-action-right {
+    float:right;
+    margin: 0 3px 0 2px;
+    padding: 0 ! important;
+}
+.ux-grow-action-text {
+    padding: 0 ! important;
+    margin:0 ! important;
+    background:transparent none ! important;
+    float:left;
+}
+
+/* images */
+.icon-cross-group {
+    background-image: url('../images/cross.png') !important;
+}
+
+.icon-add-group {
+    background-image: url('../images/add.gif') !important;
+}
+
+.icon-add-blue-group {
+    background-image: url('../images/add_blue.png') !important;
+}
