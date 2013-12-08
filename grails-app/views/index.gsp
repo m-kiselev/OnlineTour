@@ -47,12 +47,9 @@
 
 <!doctype html>
 <html>
-<head>
-<link rel="stylesheet"
-	href="${resource(dir:'js/extjs', file:'ext-all.css')}" />
-<script type="text/javascript"
-	src="${resource(dir:'js/extjs', file:'ext-all-debug.js')}"></script>
-<script type="text/javascript"
-	src="${resource(dir:'js/app', file : 'app.js')}"></script>
-</head>
+	<head>
+		<link rel="stylesheet" href="${resource(dir:'js/extjs', file:'ext-all.css')}" />
+		<script type="text/javascript" src="${resource(dir:'js/extjs', file:'ext-all-debug.js')}"></script>
+		<script type="text/javascript" src="${resource(dir:'js/app', file : 'app.js')}"></script>
+	</head>
 </html>

@@ -9,7 +9,7 @@ Ext.define("app.view.MainToolbar", {
         initComponent: function() {
             var items = [{
                     xtype: 'tbtext',
-                    text: 'Login and Roles-Based Security Simulator'
+                    text: 'Cистемa online бронирования туров Грин-Тур'
             }, {
                     xtype: 'tbfill'
             }];
@@ -17,16 +17,28 @@ Ext.define("app.view.MainToolbar", {
             if (app.User.isAdmin()) {
                 items.push({
                     xtype: 'button',
-                    text: 'For Admins'
-                });
-            } else {
-                items.push({
-                    xtype: 'button',
-                    text: 'For  Users'
+                    text: 'Управление пользователями',
+                    handler: addUserManagementPanel
                 });
             }
+
+            items.push({
+                xtype: 'button',
+                text: 'Выход',
+                handler: function() {
+                    window.location.href = 'logout';
+                }
+            });
 
             Ext.apply(this, {items: items});
             this.callParent(arguments);
         }
-})
+});
+
+function addUserManagementPanel(button) {
+    button.disable();
+    var viewport = button.up('viewport');
+    var infoPanel = viewport.down('panel[name=InfoPanel]');
+    var umPanel = Ext.create('app.view.UserManagementPanel', {height: '600'});
+    infoPanel.add(umPanel);
+};

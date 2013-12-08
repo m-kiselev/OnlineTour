@@ -10,7 +10,8 @@ Ext.define('app.view.Viewport', {
     ],
 
     layout: {
-        type: 'border'
+        type: 'border',
+        padding: 5
     },
 
     items: [{
@@ -18,11 +19,24 @@ Ext.define('app.view.Viewport', {
         xtype: 'maintoolbar',
         height: 35
     },{
+        region: 'west',
+        collapsible: true,
+        title: 'Список туров',
+        split: true,
+        width: '20%',
+        minWidth: 100,
+        minHeight: 140,
+        html: 'Здесь будет список туров'
+    },{
         region: 'center',
         plain: true,
-        xtype: 'tabpanel',
+        layout: 'anchor',
         items:[{
-            title: 'Welcome!'
+        	xtype: 'panel',
+        	name: 'InfoPanel',
+            title: 'Информационая панель',
+            layout: 'anchor',
+            anchor: '100% 100%'
         }]
     }]
 });

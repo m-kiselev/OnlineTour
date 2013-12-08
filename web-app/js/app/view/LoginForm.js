@@ -35,7 +35,6 @@ Ext.define('app.view.LoginForm', {
 function fnLoginForm(loginForm)
 {
     var username = loginForm.down('textfield[name=j_username]').getValue();
-    console.log("username: " + username);
     loginForm.getForm().submit({
         success: function(form, action) {
             Ext.Ajax.request({
@@ -49,18 +48,12 @@ function fnLoginForm(loginForm)
                         if (data.userName) {
                             // instantiate user info in global scope for easy referencing
                             app.User = Ext.create("app.user.Profile", {
-                                    userName: data.userName,
-                                    userRole: data.userRole
+                                userName: data.userName,
+                                userRole: data.userRole
                             });
 
                             // destroy login form
                             loginForm.destroy();
-
-//                            Ext.Msg.alert("Login Successful",
-//                                  Ext.String.format("Welcome {0} {1}",
-//                                      app.User.getUserName(),
-//                                      app.User.getUserRole())
-//                            );
 
                             // load main UI
                             Ext.create("app.view.Viewport");

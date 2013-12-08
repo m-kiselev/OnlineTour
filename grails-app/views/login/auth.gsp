@@ -1,8 +1,3 @@
-<script type="text/javascript">
-        var defLoginUrl = '${postUrl}';
-        var homeUrl = '${createLink(action:'index')}';
-</script>
-
 <!doctype html>
 <html>
     <head>

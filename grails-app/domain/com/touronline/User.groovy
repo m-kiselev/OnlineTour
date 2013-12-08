@@ -10,12 +10,12 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-//	UserInfo userInfo
+	UserInfo userInfo
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-//		userInfo nullable: false
+		userInfo nullable: false
 	}
 
 	static mapping = {
@@ -38,5 +38,9 @@ class User {
 
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
+	}
+	
+	String toString() {
+		return "User information: ${username}, ${userInfo.lowCompanyName}, ${userInfo.realCompanyName}, ${userInfo.companyAdress}, ${userInfo.personName}"
 	}
 }

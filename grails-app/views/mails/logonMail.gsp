@@ -13,7 +13,7 @@
 					style="border: 1px solid black; padding: 5px;">Юридическое
 					название компании</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.lowCompanyName}
+					${parameters.lowCompanyName}
 				</td>
 			</tr>
 			<tr>
@@ -21,7 +21,7 @@
 					style="border: 1px solid black; padding: 5px;">Фактическое
 					название компании</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.realCompanyName}
+					${parameters.realCompanyName}
 				</td>
 			</tr>
 			<tr>
@@ -29,7 +29,7 @@
 					style="border: 1px solid black; padding: 5px;">Фактический
 					адрес компании</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.companyAdress}
+					${parameters.companyAdress}
 				</td>
 			</tr>
 			<tr>
@@ -37,21 +37,21 @@
 					style="border: 1px solid black; padding: 5px;">Контактный
 					телефон</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.phone}
+					${parameters.phone}
 				</td>
 			</tr>
 			<tr>
 				<th bgcolor="silver" align="left"
 					style="border: 1px solid black; padding: 5px;">Контактное лицо</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.personName}
+					${parameters.personName}
 				</td>
 			</tr>
 			<tr>
 				<th bgcolor="silver" align="left"
 					style="border: 1px solid black; padding: 5px;">Логин</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.loginName}
+					${parameters.loginName}
 				</td>
 			</tr>
 			<tr>
@@ -59,7 +59,7 @@
 					style="border: 1px solid black; padding: 5px;">Электронная
 					почта</th>
 				<td style="border: 1px solid black; padding: 5px;">
-					${params.email}
+					${parameters.email}
 				</td>
 			</tr>
 		</table>

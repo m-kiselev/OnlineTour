@@ -1,3 +1,4 @@
+package com.touronline
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class LogoutController {

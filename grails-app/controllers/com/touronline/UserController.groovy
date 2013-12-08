@@ -107,4 +107,74 @@ class UserController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def getUsers() {
+		boolean isActive = params.active.toBoolean()
+		def result = User.findAllByEnabled(isActive).collect {
+			[	id:              it.id,
+				username:        it.username,
+				lowCompanyName:  it.userInfo.lowCompanyName,
+				realCompanyName: it.userInfo.realCompanyName,
+				companyAdress:   it.userInfo.companyAdress,
+				phone:           it.userInfo.phone,
+				personName:      it.userInfo.personName,
+				email:           it.userInfo.email,
+				role:            UserRole.findByUser(it).getRole().getAuthority()
+			]
+		}
+		render result as JSON
+	}
+	
+	def deleteActiveUser() {
+		Long userId = params.userId.toLong()
+		def userInstance = User.get(userId)
+		def userRole = UserRole.findByUser(userInstance)
+		userRole.delete(flush: true)
+		userInstance.delete(flush: true)
+		
+		sendMail {
+			to userInstance.getUserInfo().email
+			from "greentour.online@gmail.com"
+			subject "Система online бронирования туров Грин-Тур"
+			body "Пользователь ${userInstance.username} был удален из системы"
+		}
+
+		def answer = ['success': true]
+		render answer as JSON
+	}
+	
+	def acceptUser() {
+		Long userId = params.userId.toLong()
+		def userInstance = User.get(userId)
+		userInstance.setEnabled(true)
+		userInstance.save(flush: true)
+		
+		sendMail {
+			to userInstance.getUserInfo().email
+			from "greentour.online@gmail.com"
+			subject "Система online бронирования туров Грин-Тур"
+			body "Заявка пользователя ${userInstance.username} была одобрена"
+		}
+		
+		def answer = ['success': true]
+		render answer as JSON
+	}
+
+	def deleteDisabledUser() {
+		Long userId = params.userId.toLong()
+		def userInstance = User.get(userId)
+		def userRole = UserRole.findByUser(userInstance)
+		userRole.delete(flush: true)
+		userInstance.delete(flush: true)
+
+		sendMail {
+			to userInstance.getUserInfo().email
+			from "greentour.online@gmail.com"
+			subject "Система online бронирования туров Грин-Тур"
+			body "Пользователю ${userInstance.username} было оказано в регистрации. Просьба внимательнее заполнять поля при регистрации."
+		}
+
+		def answer = ['success': true]
+		render answer as JSON
+	}
 }
