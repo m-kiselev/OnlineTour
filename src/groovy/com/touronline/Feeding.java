@@ -1,0 +1,12 @@
+package com.touronline;
+
+public enum Feeding {
+	NO_FOOD,
+	BREAKFAST,
+	BREAKFAST_DINNER,
+	BREAKFAST_LUNCH,
+	LUNCH_DINNER,
+	THREE_X,
+	FOUR_X,
+	BUFFET_BREAKFAST
+}

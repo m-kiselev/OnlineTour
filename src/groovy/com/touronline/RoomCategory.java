@@ -1,0 +1,10 @@
+package com.touronline;
+
+public enum RoomCategory {
+	ROOM_WITOUT_AMENITIES,
+	ROOM_FLOОR_AMENITIES,
+	ROOM_BLOCK_AMENITIES,
+	ROOM_AMENITIES,
+	JUNIOR_LUXE,
+	LUXE
+}
