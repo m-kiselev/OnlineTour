@@ -33,6 +33,8 @@ class BookingRequest {
 	Integer coast
 	Integer commission
 	Integer finalCoast
+	
+	User requestCreator
 
 	static hasMany = [persons: Person]
 	static belongsTo = [timeInterval: TimeInterval]
