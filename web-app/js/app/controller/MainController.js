@@ -4,9 +4,9 @@
 Ext.define('app.controller.MainController', {
     extend: 'Ext.app.Controller',
     requires: ['app.user.Profile'],
-    views: ['LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel'],
-    stores: ['Users'],
-    models: ['User'],
+    views: ['LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel', 'TourBrowser', 'AddNewTourWindow'],
+    stores: ['Users', 'Tours', 'EnumTourPriority'],
+    models: ['User', 'Tour'],
     init: function(application) {
         this.control({
             "logonform button[action=logon]": {

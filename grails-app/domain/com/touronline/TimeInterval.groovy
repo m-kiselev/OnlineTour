@@ -4,18 +4,27 @@ class TimeInterval {
 
 	Date startDate
 	Date endDate
-	String period
+	String name
 
     static constraints = {
 		startDate nullable:false
 		endDate   nullable:false
-		period    nullable:false
+		name      nullable:false, unique: true
     }
 	
+//	public TimeInterval() {}
+//
+//	public TimeInterval(Date startDate, Date endDate, Hotel hotel) {
+//		this.startDate = startDate
+//		this.endDate = endDate
+////		this.name = startDate.toString() + "-" + endDate.toString()
+//		this.hotel = hotel
+//	}
+
 	static hasMany = [bookingRequests: BookingRequest]
 	static belongsTo = [hotel: Hotel]
-
-	String getPeriodValue() {
-		return startDate.toString() + "-" + endDate.toString()
-	} 
+	
+	static String buildName(Date date1, Date date2) {
+		return date1.toString() + "-" + date2.toString()
+	}
 }

@@ -1,14 +1,14 @@
 /**
  * 
  */
+var rootDir = '/OnlineTour/static/js/app';
+Ext.Loader.loadScript(rootDir + '/extra/Utils.js');
+
 Ext.application({
     name: 'app',
-    appFolder: '/OnlineTour/static/js/app',
+    appFolder: rootDir,
     controllers: ['MainController'],
-//    views: ["LoginForm"],
-//    autoCreateViewport: false,
     launch: function() {
-//        Ext.create("app.view.LoginForm");
         Ext.create('Ext.container.Viewport', {
             items: {
                 xtype: 'loginform'

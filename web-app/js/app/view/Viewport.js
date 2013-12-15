@@ -23,10 +23,14 @@ Ext.define('app.view.Viewport', {
         collapsible: true,
         title: 'Список туров',
         split: true,
-        width: '20%',
+        width: '30%',
         minWidth: 100,
         minHeight: 140,
-        html: 'Здесь будет список туров'
+        layout: 'anchor',
+        items: [{
+        	xtype: 'tourbrowser',
+            layout: 'anchor',
+        }]
     },{
         region: 'center',
         plain: true,
@@ -34,7 +38,6 @@ Ext.define('app.view.Viewport', {
         items:[{
         	xtype: 'panel',
         	name: 'InfoPanel',
-            title: 'Информационая панель',
             layout: 'anchor',
             anchor: '100% 100%'
         }]
