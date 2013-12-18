@@ -1,7 +1,7 @@
 Ext.define('app.view.AddNewTourWindow', {
 	extend: 'Ext.window.Window',
 	alias: 'widget.newtour',
-	title: 'Новый тур',
+	title: 'Новое направление',
 	modal: true,
 	bodyPadding: 5,
 	width: 300,

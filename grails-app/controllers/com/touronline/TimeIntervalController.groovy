@@ -1,6 +1,27 @@
 package com.touronline
 
-class TimeIntervalController {
+import grails.converters.JSON
 
-    def index() { }
+class TimeIntervalController {
+	def TimeIntervalService
+	
+	def getList(params) {
+		render (TimeIntervalService.getList(params) as JSON)
+	}
+
+	def getInfo(params) {
+		render (TimeIntervalService.getInfo(params) as JSON)
+	}
+
+	def addTimeInterval() {
+		render (TimeIntervalService.addTimeInterval(params) as JSON)
+	}
+
+	def editTimeInterval() {
+		render (TimeIntervalService.editTimeInterval(params) as JSON)
+	}
+
+	def deleteTimeInterval() {
+		render(TimeIntervalService.deleteTimeInterval(params) as JSON)
+	}
 }

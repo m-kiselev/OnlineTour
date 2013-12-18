@@ -1,6 +1,27 @@
 package com.touronline
 
-class HotelController {
+import grails.converters.JSON
 
-    def index() { }
+class HotelController {
+	def HotelService
+	
+	def getList(params) {
+		render (HotelService.getList(params) as JSON);
+	}
+
+	def getInfo(params) {
+		render (HotelService.getInfo(params) as JSON);
+	}
+
+	def addHotel() {
+		render (HotelService.addHotel(params) as JSON);
+	}
+
+	def editHotel() {
+		render (HotelService.editHotel(params) as JSON);
+	}
+
+	def deleteHotel() {
+		render(HotelService.deleteHotel(params) as JSON);
+	}
 }

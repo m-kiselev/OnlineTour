@@ -16,8 +16,9 @@ Ext.define("app.view.MainToolbar", {
 
             if (app.User.isAdmin()) {
                 items.push({
-                    xtype: 'button',
-                    text: 'Управление пользователями',
+                    xtype  : 'button',
+                    itemId : 'umButton',
+                    text   : 'Управление пользователями',
                     handler: addUserManagementPanel
                 });
             }
@@ -39,6 +40,12 @@ function addUserManagementPanel(button) {
     button.disable();
     var viewport = button.up('viewport');
     var infoPanel = viewport.down('panel[name=InfoPanel]');
+    // Remove user management panel if exist
+    var centralPanel = viewport.down('centralpanel');
+    if (typeof centralPanel != 'undefined' && centralPanel != null) {
+        centralPanel.destroy();
+    }
+
     var umPanel = Ext.create('app.view.UserManagementPanel', {height: '600'});
     infoPanel.add(umPanel);
 };

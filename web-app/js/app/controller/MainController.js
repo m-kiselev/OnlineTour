@@ -4,7 +4,7 @@
 Ext.define('app.controller.MainController', {
     extend: 'Ext.app.Controller',
     requires: ['app.user.Profile'],
-    views: ['LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel', 'TourBrowser', 'AddNewTourWindow'],
+    views:  ['LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel', 'TourBrowser', 'AddNewTourWindow','CentralPanel'],
     stores: ['Users', 'Tours', 'EnumTourPriority'],
     models: ['User', 'Tour'],
     init: function(application) {

@@ -2,6 +2,7 @@ package com.touronline
 
 class BookingRequest {
 
+	String name
 	Date dateCreated
 	String sity
 
@@ -40,6 +41,9 @@ class BookingRequest {
 	static belongsTo = [timeInterval: TimeInterval]
 
     static constraints = {
+		name unique:true, nullable: false
+		
+		
 		// TODO: need to add
     }
 }

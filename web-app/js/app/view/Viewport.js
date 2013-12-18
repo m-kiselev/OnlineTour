@@ -21,7 +21,7 @@ Ext.define('app.view.Viewport', {
     },{
         region: 'west',
         collapsible: true,
-        title: 'Список туров',
+        title: 'Список направлений',
         split: true,
         width: '30%',
         minWidth: 100,
@@ -34,12 +34,7 @@ Ext.define('app.view.Viewport', {
     },{
         region: 'center',
         plain: true,
-        layout: 'anchor',
-        items:[{
-        	xtype: 'panel',
-        	name: 'InfoPanel',
-            layout: 'anchor',
-            anchor: '100% 100%'
-        }]
+        name: 'InfoPanel',
+        layout: 'anchor'
     }]
 });

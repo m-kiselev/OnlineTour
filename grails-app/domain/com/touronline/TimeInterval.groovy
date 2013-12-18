@@ -1,5 +1,7 @@
 package com.touronline
 
+import java.text.SimpleDateFormat
+
 class TimeInterval {
 
 	Date startDate
@@ -25,6 +27,7 @@ class TimeInterval {
 	static belongsTo = [hotel: Hotel]
 	
 	static String buildName(Date date1, Date date2) {
-		return date1.toString() + "-" + date2.toString()
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		return sdf.format(date1) + "-" + sdf.format(date2)
 	}
 }

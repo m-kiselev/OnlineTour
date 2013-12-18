@@ -66,14 +66,17 @@ class BootStrap {
 		String dateStr5 = "2011-08-03"
 		String dateStr6 = "2011-08-08"
 		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd")
-		
-		def timeInterval1 = new TimeInterval(startDate: sdf.parse(dateStr1), endDate: sdf.parse(dateStr2), hotel: hotel1)
+
+		def timeInterval1 = new TimeInterval(startDate: sdf.parse(dateStr1), endDate: sdf.parse(dateStr2),
+			 name: TimeInterval.buildName(sdf.parse(dateStr1), sdf.parse(dateStr2)), hotel: hotel1)
 		timeInterval1.save(flush: true)
-		def timeInterval2 = new TimeInterval(startDate: sdf.parse(dateStr3), endDate: sdf.parse(dateStr4), hotel: hotel1)
+		def timeInterval2 = new TimeInterval(startDate: sdf.parse(dateStr3), endDate: sdf.parse(dateStr4),
+			name: TimeInterval.buildName(sdf.parse(dateStr3), sdf.parse(dateStr4)), hotel: hotel1)
 		timeInterval2.save(flush: true)
-		def timeInterval3 = new TimeInterval(startDate: sdf.parse(dateStr5), endDate: sdf.parse(dateStr6), hotel: hotel1)
+		def timeInterval3 = new TimeInterval(startDate: sdf.parse(dateStr5), endDate: sdf.parse(dateStr6),
+			name: TimeInterval.buildName(sdf.parse(dateStr5), sdf.parse(dateStr6)), hotel: hotel1)
 		timeInterval3.save(flush: true)
-		
+
 		assert User.count() == 2
 		assert Role.count() == 2
 		assert UserRole.count() == 2
