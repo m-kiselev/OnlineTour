@@ -65,6 +65,7 @@ Ext.define('app.view.TourBrowser', {
             }
         },
         select: function(me, record, index) {
+            console.log("select");
             addTourToInfoPanel(this, record.data);
         },
         beforeitemcontextmenu: function(view, record, item, index, e) {
@@ -168,6 +169,7 @@ function addTourToInfoPanel(grid, tourData) {
     }
     // Remove already exist central panel
     var existCentralPanel = viewport.down('centralpanel');
+    console.log(existCentralPanel);
     if (typeof existCentralPanel != 'undefined' && existCentralPanel != null) {
         existCentralPanel.destroy();
     }

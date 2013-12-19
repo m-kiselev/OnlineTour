@@ -4,6 +4,6 @@ Ext.define('app.view.CentralPanel', {
     anchor: '100% 100%',
     layout: 'anchor',
     items: [
-        {xtype: 'userbrowser', title: 'Активные пользователи', anchor: '100% 50%', isActive: true}
+        {xtype: 'centraltree', anchor: '100% 50%'}
     ]
 });

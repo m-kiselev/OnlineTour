@@ -3,6 +3,7 @@ package com.touronline
 class HotelService {
 
 	def getList(params) {
+		println "Hotel  service: " + params
 		def result
 		if (params.pattern) {
 			def persentPatterns = "%" + params.pattern + "%"
@@ -12,9 +13,8 @@ class HotelService {
 		}
 
 		return result.collect {[
-			id:       it.id,
-			name:     it.name,
-			priority: it.priority
+//			id:       it.id,
+			name:     it.name
 		]}
 	}
 

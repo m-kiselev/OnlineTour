@@ -17,30 +17,24 @@ Ext.define('app.view.LoginForm', {
 //        {xtype: 'checkbox',fieldLabel: 'Remember Me?',name: '_spring_security_remember_me',checked: false}
     ],
     buttons: [
-       {id: 'lf.btn.login', text: 'Войти', handler: function(me) {
-           var loginForm = me.up('panel');
-           fnLoginForm(loginForm);
-        }},
-       {id: 'lf.btn.reset', text: 'Сбросить', handler: function(me) {
-           var loginForm = me.up('panel');
-           fnResetForm(loginForm);
-       }},
-        {id: 'lf.btn.logon', text: 'Зарегистрироваться', handler: function(me) {
-            var loginForm = me.up('panel');
-            fnLogon(loginForm);
-        }}
+       {id: 'lf.btn.login', text: 'Войти',    handler: fnLoginForm},
+       {id: 'lf.btn.reset', text: 'Сбросить', handler: fnResetForm},
+       {id: 'lf.btn.logon', text: 'Зарегистрироваться', handler: fnLogon}
      ]
 });
 
-function fnLoginForm(loginForm)
+function fnLoginForm(btn)
 {
-    var username = loginForm.down('textfield[name=j_username]').getValue();
-    loginForm.getForm().submit({
+    var loginForm = btn.up('form');
+
+    Ext.Ajax.request({
+        url: 'j_spring_security_check',
+        params: loginForm.getValues(),
         success: function(form, action) {
             Ext.Ajax.request({
                 url: 'user/getUserInfo',
                 params: {
-                    username: username
+                    username: loginForm.getValues().j_username
                 },
                 success: function(response) {
                         var data = Ext.decode(response.responseText);
@@ -59,7 +53,7 @@ function fnLoginForm(loginForm)
                             Ext.create("app.view.Viewport");
                         }
                 }
-        });
+            });
         },
         failure: function(form, action) {
             Ext.Msg.alert('Warning', action.result.error);
@@ -67,14 +61,16 @@ function fnLoginForm(loginForm)
     });
 } //end fnLoginForm
  
-function fnResetForm(theForm)
+function fnResetForm(btn)
 {
-    theForm.getForm().reset();
+    var form = btn.up('form').getForm();
+    form.reset();
 }
 
-function fnLogon(loginForm) {
-    var viewport = loginForm.up('viewport');
-    loginForm.destroy();
+function fnLogon(btn) {
+    var form = btn.up('form');
+    var viewport = form.up('viewport');
+    form.destroy();
     var logonFrom = Ext.create('app.view.LogonForm');
     viewport.add(logonFrom);
 }
