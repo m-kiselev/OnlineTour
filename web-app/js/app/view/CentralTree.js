@@ -1,7 +1,9 @@
     Ext.define('app.model.CentralTreeModel', {
         extend: 'Ext.data.Model',
         fields: [
-            {name: 'name', type: 'string'}
+            {name: 'nodeId', type: 'int'},
+            {name: 'name',   type: 'string'},
+            {name: 'type',   type: 'string'}
         ]
     });    
 
@@ -14,18 +16,14 @@ Ext.define('app.store.CentralTreeStore', {
         autoLoad: false,
         proxy: {
             type: "ajax",
-            url : "hotel/getList",
-            extraParams: {
-                mode: 'getTree'
-            }
-//        ,
-//            paramOrder: ['node']
+            url : "hotel/getList"
         },
         listeners: {
             beforeexpand: function( me, eOpts ) {
-                console.log("===beforeexpand==============");
-                console.log(me);
+            	console.log(me.data);
                 me.store.treeStore.proxy.extraParams.name = me.data.name;
+                me.store.treeStore.proxy.extraParams.id   = me.data.nodeId;
+                me.store.treeStore.proxy.extraParams.type = me.data.type;
             }
         }
     });

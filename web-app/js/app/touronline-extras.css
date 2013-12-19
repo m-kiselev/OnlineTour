@@ -1,3 +1,13 @@
 .touronline-bg > div {
 	background-color: #dfe9f6
 }
+
+.hotel-icon {
+	background-image: url(../../images/hotel.png) !important;
+}
+.times-icon {
+    background-image: url(../../images/times.png) !important;
+}
+.document-icon {
+    background-image: url(../../images/document.png) !important;
+}

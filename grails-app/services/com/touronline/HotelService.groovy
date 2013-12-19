@@ -13,8 +13,11 @@ class HotelService {
 		}
 
 		return result.collect {[
-//			id:       it.id,
-			name:     it.name
+			nodeId: it.id,
+			name:   it.name,
+//			icon:   'images/hotel.png',
+			iconCls:   'hotel-icon',
+			type:   'hotel'
 		]}
 	}
 
