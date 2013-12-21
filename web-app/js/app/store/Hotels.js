@@ -1,9 +1,9 @@
-Ext.define('app.store.Tours', {
+Ext.define('app.store.Hotels', {
     extend: 'Ext.data.Store',
-    model: 'app.model.Tour',
+    model: 'app.model.Hotel',
     proxy: {
         type: 'ajax',
-        url : 'tour/getList',
+        url : 'hotel/getList',
         reader: {
             type: 'json',
             root: 'entities'

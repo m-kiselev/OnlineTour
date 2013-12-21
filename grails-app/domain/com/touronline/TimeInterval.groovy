@@ -11,7 +11,7 @@ class TimeInterval {
     static constraints = {
 		startDate nullable:false
 		endDate   nullable:false
-		name      nullable:false, unique: true
+		name      nullable:false, unique: ['hotel']
     }
 	
 //	public TimeInterval() {}

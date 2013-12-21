@@ -21,7 +21,7 @@ class HotelController {
 		render (HotelService.editHotel(params) as JSON);
 	}
 
-	def deleteHotel() {
-		render(HotelService.deleteHotel(params) as JSON);
+	def delete() {
+		render(HotelService.delete(params) as JSON);
 	}
 }

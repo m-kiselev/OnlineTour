@@ -1,19 +1,18 @@
 package com.touronline
 
+import java.text.SimpleDateFormat
+
 class TimeIntervalService {
 
 	def getList(params) {
-		def result
-		if (params.pattern) {
-			def persentPatterns = "%" + params.pattern + "%"
-			result = TimeInterval.findAllByNameIlike(persentPatterns)
-		} else {
-			result = TimeInterval.findAll()
-		}
+		def hotel = Hotel.get(params.get("id"))
+		def result = TimeInterval.findAllByHotel(hotel)
 
 		return result.collect {[
-			id:       it.id,
-			name:     it.name
+			nodeId :  it.id,
+			name   :  it.name,
+			iconCls: 'times-icon',
+			type   : 'TI'
 		]}
 	}
 
@@ -22,14 +21,18 @@ class TimeIntervalService {
 		return [
 			'success'  : true,
 			id         : ti.id,
-			name       : ti.name
+			name       : ti.name,
+			startDate  : ti.startDate,
+			endDate    : ti.endDate
 		]
 	}
 
 	def setParameters(TimeInterval ti, params) {
-		ti.startDate = params.startDate
-		ti.endDate   = params.endDate
-		ti.name      = TimeInterval.buildName(params.startDate, params.endDate)
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy")
+		ti.startDate = sdf.parse(params.startDate)
+		ti.endDate   = sdf.parse(params.endDate)
+		ti.name      = TimeInterval.buildName(sdf.parse(params.startDate), sdf.parse(params.endDate))
+		ti.hotel     = Hotel.findById(params.hotelId)
 	}
 
 	def addTimeInterval(params) {
@@ -67,7 +70,7 @@ class TimeIntervalService {
 		}
 	}
 
-	def deleteTimeInterval(params) {
+	def delete(params) {
 		TimeInterval ti = TimeInterval.get(params.get("id"));
 		def msg
 		try {

@@ -6,3 +6,7 @@ function priorityRenderer(value) {
 		if (value.name == 'LOW')    return 'Низкий';
 	}
 }
+
+function getTourId() {
+	return Ext.ComponentQuery.query('#tourbrowser')[0].selectedTourId;
+}

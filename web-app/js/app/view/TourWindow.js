@@ -1,4 +1,4 @@
-Ext.define('app.view.AddNewTourWindow', {
+Ext.define('app.view.TourWindow', {
 	extend: 'Ext.window.Window',
 	alias: 'widget.newtour',
 	title: 'Новое направление',
@@ -14,16 +14,17 @@ Ext.define('app.view.AddNewTourWindow', {
 		defaults: {labelWidth: 120},
 		items: [
 		    {xtype: 'hidden', name: 'id'},
+		    {xtype: 'hidden', name: 'hotelId'},
 		    {xtype: 'textfield', fieldLabel: 'Название', name: 'name', allowBlank: false},
 		    {xtype: 'combo',     fieldLabel: 'Приоритет отображения', name: 'priority', store: 'EnumTourPriority',
 		    	displayField: 'name', valueField: 'id', editable: false},
 		    {xtype: 'textareafield', grow: true, name: 'description', fieldLabel: 'Описание', anchor: '100%'},
-		    {xtype: 'button', text: 'Сохранить', handler: addEditTour}
+		    {xtype: 'button', text: 'Сохранить', handler: handleAddEditTour}
 		]
 	}]
 });
 
-function addEditTour(btn) {
+function handleAddEditTour(btn) {
 	var addParams = btn.up('form').getValues();
 	var win = btn.up('window');
 

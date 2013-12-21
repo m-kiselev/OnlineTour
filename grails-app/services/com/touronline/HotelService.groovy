@@ -3,21 +3,14 @@ package com.touronline
 class HotelService {
 
 	def getList(params) {
-		println "Hotel  service: " + params
-		def result
-		if (params.pattern) {
-			def persentPatterns = "%" + params.pattern + "%"
-			result = Hotel.findAllByNameIlike(persentPatterns)
-		} else {
-			result = Hotel.findAll()
-		}
+		def tour   = Tour.get(params.get("id"))
+		def result = Hotel.findAllByTour(tour)
 
 		return result.collect {[
-			nodeId: it.id,
-			name:   it.name,
-//			icon:   'images/hotel.png',
-			iconCls:   'hotel-icon',
-			type:   'hotel'
+			nodeId :  it.id,
+			name   :  it.name,
+			iconCls: 'hotel-icon',
+			type   : 'hotel'
 		]}
 	}
 
@@ -34,6 +27,7 @@ class HotelService {
 	def setParameters(Hotel hotel, params) {
 		hotel.name = params.name
 		hotel.description = params.description
+		hotel.tour = Tour.findById(params.get("tourId"))
 	}
 
 	def addHotel(params) {
@@ -45,7 +39,7 @@ class HotelService {
 			if (!hotel.save()){
 				msg = ['success': false, 'message': 'Отель не сохранен!'];
 			} else {
-				msg = ['success': true];
+				msg = ['success': true, nodeId: hotel.id];
 			}
 		} catch (Exception e) {
 			msg = ['success': false, 'message': 'Error: ' + e.message]
@@ -71,7 +65,7 @@ class HotelService {
 		}
 	}
 
-	def deleteHotel(params) {
+	def delete(params) {
 		Hotel hotel = Hotel.get(params.get("id"));
 		def msg
 		try {

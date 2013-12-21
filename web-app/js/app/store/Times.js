@@ -1,9 +1,9 @@
-Ext.define('app.store.Tours', {
+Ext.define('app.store.Times', {
     extend: 'Ext.data.Store',
-    model: 'app.model.Tour',
+    model: 'app.model.TI',
     proxy: {
         type: 'ajax',
-        url : 'tour/getList',
+        url : 'timeInterval/getList',
         reader: {
             type: 'json',
             root: 'entities'

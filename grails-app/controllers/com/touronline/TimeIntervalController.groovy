@@ -21,7 +21,7 @@ class TimeIntervalController {
 		render (TimeIntervalService.editTimeInterval(params) as JSON)
 	}
 
-	def deleteTimeInterval() {
-		render(TimeIntervalService.deleteTimeInterval(params) as JSON)
+	def delete() {
+		render(TimeIntervalService.delete(params) as JSON)
 	}
 }

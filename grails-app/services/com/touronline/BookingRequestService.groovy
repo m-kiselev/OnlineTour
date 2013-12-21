@@ -3,17 +3,15 @@ package com.touronline
 class BookingRequestService {
 
 	def getList(params) {
-		def result
-		if (params.pattern) {
-			def persentPatterns = "%" + params.pattern + "%"
-			result = BookingRequest.findAllByNameIlike(persentPatterns)
-		} else {
-			result = Tour.findAll()
-		}
+		def ti     = TimeInterval.get(params.get("id"))
+		def result = BookingRequest.findAllByTimeInterval(ti)
 
 		return result.collect {[
-			id:       it.id,
-			name:     it.name
+			nodeId : it.id,
+			name   : it.name,
+			iconCls: 'document-icon',
+			type   : 'BR',
+			leaf   : true
 		]}
 	}
 
@@ -67,7 +65,7 @@ class BookingRequestService {
 		}
 	}
 
-	def deleteBookingRequest(params) {
+	def delete(params) {
 		BookingRequest br = BookingRequest.get(params.get("id"));
 		def msg
 		try {

@@ -21,7 +21,7 @@ class BookingRequestController {
 		render (BookingRequestService.editBookingRequest(params) as JSON)
 	}
 
-	def deleteBookingRequest() {
-		render(BookingRequestService.deleteBookingRequest(params) as JSON)
+	def delete() {
+		render(BookingRequestService.delete(params) as JSON)
 	}
 }

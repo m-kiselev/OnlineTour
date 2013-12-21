@@ -4,6 +4,7 @@ Ext.define('app.view.CentralPanel', {
     anchor: '100% 100%',
     layout: 'anchor',
     items: [
-        {xtype: 'centraltree', anchor: '100% 50%'}
+        {xtype: 'centraltree', anchor: '50% 100%'},
+        {xtype: 'descriptionpanel', anchor: '50% 100%'}
     ]
 });

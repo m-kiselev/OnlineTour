@@ -1,8 +1,8 @@
  var tourContextMenu = Ext.create('Ext.menu.Menu', {
     items: [
        {xtype: 'hidden', name: 'tourId'},
-       {xtype: 'menuitem', itemId: 'add', icon: 'images/add.png', text: 'Добавить', handler: addEditTour},
-       {xtype: 'menuitem', itemId: 'edit',icon: 'images/edit.png',text: 'Редактировать',  handler: addEditTour}
+       {xtype: 'menuitem', itemId: 'add', icon: 'images/add.png', text: 'Добавить',     handler: addEditTour},
+       {xtype: 'menuitem', itemId: 'edit',icon: 'images/edit.png',text: 'Редактировать',handler: addEditTour}
     ]
 }); 
  
@@ -38,6 +38,9 @@ Ext.define('app.view.TourBrowser', {
     ],
     listeners: {
         beforerender: function(me) {
+        	var store = Ext.create('app.store.Tours');
+        	store.load();
+        	me.reconfigure(store);
             // sort tours by priority
             sortToursByPriority(me.getStore());
 
@@ -65,13 +68,12 @@ Ext.define('app.view.TourBrowser', {
             }
         },
         select: function(me, record, index) {
-            console.log("select");
+            this.selectedTourId = record.data.id;
             addTourToInfoPanel(this, record.data);
         },
         beforeitemcontextmenu: function(view, record, item, index, e) {
             if (app.User.isAdmin()) {
                 e.stopEvent();
-                console.log(record.data.id);
                 tourContextMenu.down('hidden[name=tourId]').setValue(record.data.id);
                 tourContextMenu.showAt(e.getXY());
             }
@@ -80,7 +82,7 @@ Ext.define('app.view.TourBrowser', {
 });
 
 function addEditTour(btn) {
-    var win = Ext.widget('newtour');
+    var win  = Ext.create('app.view.TourWindow');
     var form = win.down('form').getForm();
 
     if (btn.itemId == 'add') {
@@ -94,7 +96,6 @@ function addEditTour(btn) {
             params : {id: tourId},
             success : function(response, opts) {
                 var resp = Ext.decode(response.responseText);
-                console.log(resp);
                 if (resp.success == true) {
                     form.findField('id').setValue(tourId);
                     form.findField('name').setValue(resp.name);
@@ -169,11 +170,10 @@ function addTourToInfoPanel(grid, tourData) {
     }
     // Remove already exist central panel
     var existCentralPanel = viewport.down('centralpanel');
-    console.log(existCentralPanel);
     if (typeof existCentralPanel != 'undefined' && existCentralPanel != null) {
         existCentralPanel.destroy();
     }
 
-    var centralPanel = Ext.create('app.view.CentralPanel');
+    var centralPanel = Ext.create('app.view.CentralPanel', {title : 'Информация о направлении'});
     infoPanel.add(centralPanel);
 }
