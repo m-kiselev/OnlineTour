@@ -18,7 +18,8 @@ class HotelService {
 		Hotel hotel = Hotel.get(params.get("id"))
 		return [
 			'success'  : true,
-			id         : hotel.id,
+			nodeId     : hotel.id,
+			origName   : hotel.name,
 			name       : hotel.name,
 			description: hotel.description
 		]

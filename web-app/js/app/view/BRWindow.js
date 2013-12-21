@@ -18,6 +18,7 @@ Ext.define('app.view.BRWindow', {
 //		    {xtype: 'combo',     fieldLabel: 'Приоритет отображения', name: 'priority', store: 'EnumTourPriority',
 //		    	displayField: 'name', valueField: 'id', editable: false},
 //		    {xtype: 'textareafield', grow: true, name: 'description', fieldLabel: 'Описание', anchor: '100%'},
+		    // TODO: add fields
 		    {xtype: 'button', text: 'Сохранить', handler: handleAddEditBR}
 		]
 	}]

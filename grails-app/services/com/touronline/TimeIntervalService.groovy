@@ -20,8 +20,10 @@ class TimeIntervalService {
 		TimeInterval ti = TimeInterval.get(params.get("id"))
 		return [
 			'success'  : true,
-			id         : ti.id,
+			nodeId     : ti.id,
+			hotelId    : ti.hotel.id,
 			name       : ti.name,
+			origName   : ti.name,
 			startDate  : ti.startDate,
 			endDate    : ti.endDate
 		]
@@ -44,7 +46,7 @@ class TimeIntervalService {
 			if (!ti.save()){
 				msg = ['success': false, 'message': 'Временной интервал не сохранен!'];
 			} else {
-				msg = ['success': true];
+				msg = ['success': true, nodeId: ti.id];
 			}
 		} catch (Exception e) {
 			msg = ['success': false, 'message': 'Error: ' + e.message]
@@ -61,7 +63,7 @@ class TimeIntervalService {
 			if (!ti.save()){
 				msg = ['success': false, 'message': 'Временной интервал не сохранен!'];
 			} else {
-				msg = ['success': true];
+				msg = ['success': true, name: ti.name];
 			}
 		} catch (Exception e) {
 			msg = ['success': false, 'message': 'Error: ' + e.message]

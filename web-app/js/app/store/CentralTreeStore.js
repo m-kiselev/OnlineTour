@@ -15,14 +15,9 @@ Ext.define('app.store.CentralTreeStore', {
                 return false;
         },
         beforeexpand: function( me, eOpts ) {
-//        	console.log(me);
-//        	if (me.data.root) {
-//        		this.store.treeStore.proxy.extraParams.id   = me.data.id;
-//        	} else {
-		        me.store.treeStore.proxy.extraParams.name = me.data.name;
-		        me.store.treeStore.proxy.extraParams.id   = me.data.nodeId;
-		        me.store.treeStore.proxy.extraParams.type = me.data.type;
-//        	}
+            me.store.treeStore.proxy.extraParams.name = me.data.name;
+            me.store.treeStore.proxy.extraParams.id   = me.data.nodeId;
+            me.store.treeStore.proxy.extraParams.type = me.data.type;
         }
     }
 });

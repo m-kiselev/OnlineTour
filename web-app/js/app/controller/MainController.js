@@ -7,7 +7,7 @@ Ext.define('app.controller.MainController', {
     views:  ['Viewport','LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel', 'TourBrowser',
              'TourWindow', 'HotelWindow', 'TimesWindow', 'BRWindow','CentralPanel', 'CentralTree', 'DescriptionPanel'],
     stores: ['Users', 'Tours', 'Hotels', 'Times', 'EnumTourPriority', 'CentralTreeStore'],
-    models: ['User', 'Tour', 'Hotel', 'TI', 'CentralTreeModel'],
+    models: ['User', 'Tour', 'Hotel', 'TI', 'BR', 'CentralTreeModel'],
     init: function(application) {
         this.control({
             "logonform button[action=logon]": {

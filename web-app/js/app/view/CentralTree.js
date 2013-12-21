@@ -9,11 +9,11 @@ Ext.define('app.view.CentralTree', {
         menu: [
            {xtype: 'hidden',   name: 'tourId'},
            {xtype: 'menuitem', itemId: 'addHotel',icon: 'images/hotel.png',   
-                text: 'Добавить отель', handler: function() {addEditHolel(true);}},
+                text: 'Добавить отель', handler: function() {addEditItem(true, 'hotel');}},
            {xtype: 'menuitem', itemId: 'addTI',   icon: 'images/times.png'  ,
-                text: 'Добавить время', handler:function() {addEditTI(true);}},
+                text: 'Добавить время', handler:function() {addEditItem(true, 'TI');}},
            {xtype: 'menuitem', itemId: 'addBR',   icon: 'images/document.png',
-                text: 'Добавить заявку',handler: function() {addEditBR(true);}}
+                text: 'Добавить заявку',handler: function() {addEditItem(true, 'BR');}}
         ]},
         ,'-',
         {xtype: 'button', itemId: 'delete',text: 'Удалить', disabled: true, handler: deleteItem}
@@ -48,13 +48,7 @@ Ext.define('app.view.CentralTree', {
                     console.log(record.data);
                     var recordType = record.get('type');
                     var nodeId     = record.get('nodeId');
-                    if (recordType == 'hotel') {
-                        addEditHolel(false, nodeId);
-                    } else if (recordType == 'TI') {
-                        addEditTI(false, nodeId);
-                    } else if (recordType == 'BR') {
-                        addEditBR(false, nodeId);
-                    }
+                    addEditItem(false, recordType, nodeId);
                 },
                 getClass: function(v, meta, rec) {
                     if(!rec.data.leaf && !app.User.isAdmin()) {
@@ -68,88 +62,49 @@ Ext.define('app.view.CentralTree', {
     }
 });
 
-function addEditHolel(isAdd, hotelId) {
-    var win = Ext.create('app.view.HotelWindow');
+
+function addEditItem(isAdd, type, itemId) {
+	var modelName  = null;
+	var winTitle   = null;
+	var windowName = null;
+	if (type == 'hotel') {
+		modelName  = 'app.model.Hotel';
+		winTitle   = "Редактирование отеля";
+		windowName = 'app.view.HotelWindow';
+	} else if (type == 'TI') {
+		modelName  = 'app.model.TI';
+		winTitle   = "Редактирование времени";
+		windowName = 'app.view.TimesWindow';
+	} else if (type == 'BR') {
+		modelName  = 'app.model.BR';
+		winTitle   = "Редактирование заяки";
+		windowName = 'app.view.BRWindow';
+	}
+
+	var Model = Ext.ModelManager.getModel(modelName);
+
+    var win = Ext.create(windowName);
     var form = win.down('form').getForm();
     form.findField('tourId').setValue(getTourId());
 
     if (!isAdd) {
-        win.setTitle("Редактирование отель");
+        win.setTitle(winTitle);
         win.action = 'edit';
-        Ext.Ajax.request({
-            url : 'hotel/getInfo',
-            params : {id: hotelId},
-            success : function(response, opts) {
-                var resp = Ext.decode(response.responseText);
-                if (resp.success == true) {
-                    form.findField('id').setValue(resp.id);
-                    form.findField('origName').setValue(resp.name);
-                    form.findField('name').setValue(resp.name);
-                    form.findField('description').setValue(resp.description);
-                } else {
-                    Ext.Msg.alert("Error", resp.message);
-                }
-            }
-        });
+        
+        Model.load(itemId, {
+    	    success: function(item) {
+    	    	console.log("================");
+    	        console.log(item); //logs 123
+    	        form.loadRecord(item);
+    	    },
+    	    failure: function(resp) {
+    	    	Ext.Msg.alert("Error", resp.message);
+    	    }
+    	});
     }
 
     win.show();
-};
-
-function addEditTI(isAdd, TIId) {
-    var win = Ext.create('app.view.TimesWindow');
-    var form = win.down('form').getForm();
-    form.findField('tourId').setValue(getTourId());
-
-    if (!isAdd) {
-        win.setTitle("Редактирование времени");
-        win.action = 'edit';
-        Ext.Ajax.request({
-            url : 'timeInterval/getInfo',
-            params : {id: TIId},
-            success : function(response, opts) {
-                var resp = Ext.decode(response.responseText);
-                if (resp.success == true) {
-                    form.findField('id').setValue(resp.id);
-                    form.findField('origName').setValue(resp.name);
-                    form.findField('name').setValue(resp.name);
-                    form.findField('startDate').setValue(resp.startDate);
-                    form.findField('endDate').setValue(resp.endDate);
-                } else {
-                    Ext.Msg.alert("Error", resp.message);
-                }
-            }
-        });
-    }
-
-    win.show();
-};
-
-function addEditBR(isAdd, BRId) {
-    var win = Ext.create('app.view.BRWindow');
-    var form = win.down('form').getForm();
-
-    if (!isAdd) {
-        win.setTitle("Редактирование заяки");
-        win.action = 'edit';
-        Ext.Ajax.request({
-            url : 'bookingRequest/getInfo',
-            params : {id: BRId},
-            success : function(response, opts) {
-                var resp = Ext.decode(response.responseText);
-                if (resp.success == true) {
-                    form.findField('id').setValue(resp.id);
-//                    form.findField('name').setValue(resp.name);
-//                    form.findField('description').setValue(resp.description);
-                } else {
-                    Ext.Msg.alert("Error", resp.message);
-                }
-            }
-        });
-    }
-
-    win.show();
-};
+}
 
 function deleteItem(deleteButton) {
     Ext.MessageBox.confirm('Подтверждение',
