@@ -19,7 +19,14 @@ class UserController {
 	def getUserInfo() {
 		User user = User.findByUsername(params.username)
 		String userRole = UserRole.findByUser(user).getRole().getAuthority()
-		def resp = [userName: params.username, userRole: userRole]
+		def resp = [
+			userName: params.username,
+			userRole: userRole,
+			agencyName: user.userInfo.realCompanyName,
+			phone     : user.userInfo.phone,
+			personName: user.userInfo.personName,
+			email     : user.userInfo.email
+		]
 		render resp as JSON
 	}
 

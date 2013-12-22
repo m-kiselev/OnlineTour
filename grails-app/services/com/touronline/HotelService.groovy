@@ -1,10 +1,22 @@
 package com.touronline
+import groovy.util.Eval
 
 class HotelService {
 
 	def getList(params) {
 		def tour   = Tour.get(params.get("id"))
 		def result = Hotel.findAllByTour(tour)
+		
+		if (params.hotelIds) {
+			println "params: " + params.hotelIds
+			
+			
+//			def hotelIds = (params.hotelIds =~ /(\d+)/).collect { it[1] }
+//			def hotelIds = params.hotelIds.tokenize(' ,[]')*.toInteger()
+//			def hotelIds =  params.hotelIds.split(",")
+//			println "hotelIds: " + hotelIds
+//			result = result.removeAll { res -> !hotelIds.contains(res.id) }
+		}
 
 		return result.collect {[
 			nodeId :  it.id,

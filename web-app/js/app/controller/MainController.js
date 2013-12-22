@@ -4,9 +4,11 @@
 Ext.define('app.controller.MainController', {
     extend: 'Ext.app.Controller',
     requires: ['app.user.Profile'],
-    views:  ['Viewport','LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel', 'TourBrowser',
-             'TourWindow', 'HotelWindow', 'TimesWindow', 'BRWindow','CentralPanel', 'CentralTree', 'DescriptionPanel'],
-    stores: ['Users', 'Tours', 'Hotels', 'Times', 'EnumTourPriority', 'CentralTreeStore'],
+    views:  ['Viewport','LoginForm', 'LogonForm', 'UserBrowser', 'UserManagementPanel',
+             'TourBrowser', 'TourWindow', 'HotelWindow', 'TimesWindow', 'BRWindow',
+             'CentralPanel', 'CentralTree', 'DescriptionPanel'],
+    stores: ['Users', 'Tours', 'Hotels', 'Times', 'EnumTourPriority', 'EnumFeeding',
+             'EnumRoomCategory', 'CentralTreeStore'],
     models: ['User', 'Tour', 'Hotel', 'TI', 'BR', 'CentralTreeModel'],
     init: function(application) {
         this.control({

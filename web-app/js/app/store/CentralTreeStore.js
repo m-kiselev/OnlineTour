@@ -14,7 +14,10 @@ Ext.define('app.store.CentralTreeStore', {
             if (app.User == null)
                 return false;
         },
-        beforeexpand: function( me, eOpts ) {
+        beforeexpand: function(me, eOpts) {
+        	if (!app.User.isAdmin()) {
+        		me.store.treeStore.proxy.extraParams.userName = app.User.userName;
+        	}
             me.store.treeStore.proxy.extraParams.name = me.data.name;
             me.store.treeStore.proxy.extraParams.id   = me.data.nodeId;
             me.store.treeStore.proxy.extraParams.type = me.data.type;

@@ -1,5 +1,8 @@
+import com.touronline.BookingRequest
+import com.touronline.Feeding;
 import com.touronline.Hotel
 import com.touronline.Role
+import com.touronline.RoomCategory;
 import com.touronline.TimeInterval
 import com.touronline.Tour
 import com.touronline.TourPriority;
@@ -77,12 +80,29 @@ class BootStrap {
 			name: TimeInterval.buildName(sdf.parse(dateStr5), sdf.parse(dateStr6)), hotel: hotel1)
 		timeInterval3.save(flush: true)
 
+		def BR1 = new BookingRequest(timeInterval: timeInterval1, name: 'BR1', numberTourist: 1, bedsInRoom: 2,
+			roomCategory: RoomCategory.LUXE, feeding: Feeding.BREAKFAST, coast: 3333, commission: 333,
+			finalCoast: 1221, requestCreator: testUser)
+		// for debbug
+		//BR1.validate()
+		//println "BR1 errors: "  + BR1.errors
+		BR1.save(flush: true)
+		def BR2 = new BookingRequest(timeInterval: timeInterval1, name: 'BR2', numberTourist: 2, bedsInRoom: 2,
+			roomCategory: RoomCategory.JUNIOR_LUXE, feeding: Feeding.BREAKFAST_DINNER, coast: 3, commission: 3,
+			finalCoast: 111, requestCreator: testUser)
+		BR2.save(flush: true)
+		def BR3 = new BookingRequest(timeInterval: timeInterval1, name: 'BR3', numberTourist: 2, bedsInRoom: 2,
+			roomCategory: RoomCategory.JUNIOR_LUXE, feeding: Feeding.BREAKFAST_DINNER, coast: 3, commission: 3,
+			finalCoast: 111, requestCreator: adminUser)
+		BR3.save(flush: true)
+		
 		assert User.count() == 2
 		assert Role.count() == 2
 		assert UserRole.count() == 2
 		assert Tour.count() == 4
 		assert Hotel.count() == 3
 		assert TimeInterval.count() == 3
+		assert BookingRequest.count() == 3
     }
 
     def destroy = {

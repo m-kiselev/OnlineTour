@@ -12,13 +12,14 @@ Ext.define('app.view.HotelWindow', {
         cls: 'touronline-bg',
         border: 0,
         defaults: {labelWidth: 120},
+        monitorValid: true,
         items: [
             {xtype: 'hidden', name: 'id'},
             {xtype: 'hidden', name: 'tourId'},
             {xtype: 'hidden', name: 'origName'},
-            {xtype: 'textfield', fieldLabel: 'Название', name: 'name', allowBlank: false},
+            {xtype: 'textfield', fieldLabel: 'Название', name: 'name', allowBlank: false, afterLabelTextTpl: markFieldRequired},
             {xtype: 'textareafield', grow: true, name: 'description', fieldLabel: 'Описание', anchor: '100%'},
-            {xtype: 'button', text: 'Сохранить', handler: handleAddEditHotel}
+            {xtype: 'button', text: 'Сохранить', formBind: true, handler: handleAddEditHotel}
         ]
     }]
 });

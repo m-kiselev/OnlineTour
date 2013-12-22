@@ -2,6 +2,10 @@
 	background-color: #dfe9f6
 }
 
+.left-scroll > .x-panel-body > .touronline-bg {
+    direction:ltr;
+}
+
 .hotel-icon {
 	background-image: url(../../images/hotel.png) !important;
 }
@@ -10,4 +14,7 @@
 }
 .document-icon {
     background-image: url(../../images/document.png) !important;
+}
+.x-right-button {
+    float: right;
 }

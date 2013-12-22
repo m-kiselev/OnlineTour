@@ -35,8 +35,12 @@ function fnLoginForm(btn) {
                     if (data.userName) {
                         // instantiate user info in global scope for easy referencing
                         app.User = Ext.create("app.user.Profile", {
-                            userName: data.userName,
-                            userRole: data.userRole
+                            userName  : data.userName,
+                            userRole  : data.userRole,
+                            agencyName: data.agencyName,
+                            phone     : data.phone,
+                            personName: data.personName,
+                            email     : data.email
                         });
 
                         // destroy login form

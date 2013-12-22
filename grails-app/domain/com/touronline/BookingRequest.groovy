@@ -7,10 +7,10 @@ class BookingRequest {
 	String sity
 
 	/* these fields will be filled from the UserInfo. But may be overridden. */
-	String agencyName
-	String phone
-	String personName
-	String email
+//	String agencyName
+//	String phone
+//	String personName
+//	String email
 
 	Long numberTourist
 	
@@ -41,9 +41,31 @@ class BookingRequest {
 	static belongsTo = [timeInterval: TimeInterval]
 
     static constraints = {
-		name unique:true, nullable: false
+		name unique:['timeInterval'], nullable: false
+		sity       nullable: true
+//		agencyName nullable: false
+//		phone      nullable: false
+//		personName nullable: false
+//		email      nullable: false
 		
+		numberTourist  nullable: false
+		bedsInRoom     nullable: false
+		additionalBeds nullable: true
+		additionalBed  nullable: true
+		roomCategory   nullable: false
+		feeding        nullable: false
 		
-		// TODO: need to add
+		excursions         nullable: true
+		individualServices nullable: true
+		insurance          nullable: true
+		addInsurance       nullable: true
+		
+		note nullable: true
+		
+		coast      nullable: false
+		commission nullable: false
+		finalCoast nullable: false
+		
+		requestCreator nullable: false
     }
 }

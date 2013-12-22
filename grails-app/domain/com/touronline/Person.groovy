@@ -1,7 +1,7 @@
 package com.touronline
 
 class Person {
-	String FIO
+	String fio
 	Date birthDate
 	String passportData
 	String phone
@@ -10,6 +10,8 @@ class Person {
 	static belongsTo = [bookingRequest: BookingRequest]
 
     static constraints = {
-		// TODO: need to add
+		 fio nullable: false, blank: false
+		 birthDate    nullable: false, blank: false
+		 passportData nullable: false, blank: false
     }
 }

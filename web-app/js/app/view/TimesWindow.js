@@ -20,6 +20,7 @@ Ext.define('app.view.TimesWindow', {
             {xtype: 'combo', fieldLabel: 'Отель', name: 'hotelId', store: 'Hotels'
                 , displayField: 'name', valueField: 'id'
                 , allowBlank: false, editable:false
+                , afterLabelTextTpl: markFieldRequired
                 , listeners: {
                     beforerender: function(me) {
                         var tourId =  me.up('form').down('hidden[name=tourId]').getValue();
@@ -28,9 +29,24 @@ Ext.define('app.view.TimesWindow', {
                     }
                 }
             },
-            {xtype: 'textfield', fieldLabel: 'название', name: 'name', readOnly: true},
-            {xtype: 'datefield', fieldLabel: 'начало',   name: 'startDate', editable:false, allowBlank: false, format: 'd/m/Y'},
-            {xtype: 'datefield', fieldLabel: 'окончание',name: 'endDate'  , editable:false, allowBlank: false, format: 'd/m/Y'},
+            {xtype: 'textfield', fieldLabel: 'название', name: 'name', readOnly: true,
+            	afterLabelTextTpl: '<img src="images/info.png" class="info_image" data-qtip="Это поле заполняется автоматически, после заполнения дат."></img>'},
+            {xtype: 'datefield', fieldLabel: 'начало',   name: 'startDate', editable:false,
+        		allowBlank: false, format: 'd/m/Y', afterLabelTextTpl: markFieldRequired
+        			, listeners: {
+	        			change: function(me) {
+	        				fillNameField(me);
+	        			}
+        			}
+            },
+            {xtype: 'datefield', fieldLabel: 'окончание',name: 'endDate'  , editable:false,
+            	allowBlank: false, format: 'd/m/Y', afterLabelTextTpl: markFieldRequired
+            		, listeners: {
+	            		change: function(me) {
+	        				fillNameField(me);
+	        			}
+            		}
+            },
             {xtype: 'button', text: 'Сохранить', formBind: true, handler: handleAddEditTI}
         ]
     }],
@@ -52,8 +68,6 @@ function handleAddEditTI(btn) {
         url = 'timeInterval/editTimeInterval';
     }
 
-    function test(action, url, addParams) {};
-
     Ext.Ajax.request({
         url : url,
         params : addParams,
@@ -65,14 +79,18 @@ function handleAddEditTI(btn) {
                     var editedNode = centraltree.getRootNode().findChild('name', addParams.origName, true);
                     editedNode.data.name = resp.name;
                 } else {
-                	// TODO: implement unique name
-//                    var hotelNode = centraltree.getRootNode().findChild('name', addParams.origName, true);
-                    hotelNode.appendChild({
-                        name  : addParams.name,
-                        icon  : 'images/times.png',
-                        type  : 'TI',
-                        nodeId: resp.nodeId
-                    });
+                	var hotelName = win.down('combo[name=hotelId]').getRawValue();
+                    var hotelNode = centraltree.getRootNode().findChild('name', hotelName, true);
+                    if (hotelNode.isExpanded()) {
+	                    hotelNode.appendChild({
+	                        name  : addParams.name,
+	                        icon  : 'images/times.png',
+	                        type  : 'TI',
+	                        nodeId: resp.nodeId
+	                    });
+                    } else {
+                    	hotelNode.expand();
+                    }
                 }
                 centraltree.getView().refresh(); 
                 win.close();
@@ -81,4 +99,15 @@ function handleAddEditTI(btn) {
             }
         }
     });
+}
+
+function fillNameField(me) {
+	var form = me.up('form');
+	var startDateValue = form.down('datefield[name=startDate]').getRawValue();
+	var endDateValue   = form.down('datefield[name=endDate]').getRawValue();
+	
+	if (startDateValue != null && endDateValue != null) {
+		var nameValue = startDateValue + '-' + endDateValue;
+		form.down('textfield[name=name]').setValue(nameValue);
+	}
 }
