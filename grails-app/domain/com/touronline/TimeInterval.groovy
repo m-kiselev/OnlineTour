@@ -7,6 +7,7 @@ class TimeInterval {
 	Date startDate
 	Date endDate
 	String name
+	Bus bus
 
     static constraints = {
 		startDate nullable:false

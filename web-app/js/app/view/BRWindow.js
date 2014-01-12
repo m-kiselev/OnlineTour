@@ -94,14 +94,21 @@ Ext.define('app.view.BRWindow', {
                                 {xtype: 'combo', fieldLabel: 'Время', name: 'timeId', store: 'Times'
                                     , displayField: 'name', valueField: 'id'
                                     , allowBlank: false, editable:false
-                                    , afterLabelTextTpl: markFieldRequired,
-                                    beforerender: function(me) {
-                                        var timeId =  me.getValue();
-                                        if (timeId != null) {
-                                            me.getStore().proxy.extraParams.id = tourId;
-                                            me.getStore().load();
-                                        }
-                                    },
+                                    , afterLabelTextTpl: markFieldRequired
+                                    , listeners: {
+	                                    beforerender: function(me) {
+	                                        var timeId =  me.getValue();
+	                                        if (timeId != null) {
+	                                            me.getStore().proxy.extraParams.id = tourId;
+	                                            me.getStore().load();
+	                                        }
+	                                    },
+	                                    change: function(me) {
+	                                        var busSeatsCombo = me.up('form').down('combo[name=busSeats]');
+                                            busSeatsCombo.getStore().proxy.extraParams.tiId = me.getValue();
+                                            busSeatsCombo.getStore().load();
+	                                    }
+                                    }
                                 }
                             ]
                         }]
@@ -144,6 +151,20 @@ Ext.define('app.view.BRWindow', {
                                 {xtype: 'textareafield', grow: true, name: 'note', fieldLabel: 'Примечание', anchor: '100%'},
                             ]
                         }]
+                    },
+                    {
+                    	title: 'Размещение в автобусе',
+                    	xtype:'fieldset',
+                    	height: 330,
+                    	items: [{
+                            layout: 'column', border:0, cls:'touronline-bg',
+                            defaults:{columnWidth:.5, labelWidth: 60, padding: 5},
+                            items:[
+	                    	    {xtype: 'combo', fieldLabel: 'Места', name: 'busSeats', store: 'BusSeats', multiSelect:true,
+	                                displayField: 'name', editable: false},
+	                            {xtype: 'image', src: 'images/bus.jpg', width: 160, height: 300}
+	                        ]
+                    	}]
                     },
                     {
                     	title: 'Информация о туристах',

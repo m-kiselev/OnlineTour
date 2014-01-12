@@ -6,16 +6,7 @@ class BookingRequest {
 	Date dateCreated
 	String sity
 
-	/* these fields will be filled from the UserInfo. But may be overridden. */
-//	String agencyName
-//	String phone
-//	String personName
-//	String email
-
 	Long numberTourist
-	
-	// TODO: added transport fields
-	// vehicle, seats number and reservasionStatus
 	
 	// Number of beds in the room
 	Long bedsInRoom
@@ -37,17 +28,13 @@ class BookingRequest {
 	
 	User requestCreator
 
-	static hasMany = [persons: Person]
+	static hasMany = [persons: Person, busSeats: String]
 	static belongsTo = [timeInterval: TimeInterval]
 
     static constraints = {
 		name unique:['timeInterval'], nullable: false
 		sity       nullable: true
-//		agencyName nullable: false
-//		phone      nullable: false
-//		personName nullable: false
-//		email      nullable: false
-		
+
 		numberTourist  nullable: false
 		bedsInRoom     nullable: false
 		additionalBeds nullable: true
