@@ -1,4 +1,5 @@
 import com.touronline.BookingRequest
+import com.touronline.Bus
 import com.touronline.Feeding;
 import com.touronline.Hotel
 import com.touronline.Role
@@ -72,14 +73,15 @@ class BootStrap {
 		String dateStr6 = "2011-08-08"
 		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd")
 
+//		def bus = new Bus()
 		def timeInterval1 = new TimeInterval(startDate: sdf.parse(dateStr1), endDate: sdf.parse(dateStr2),
-			 name: TimeInterval.buildName(sdf.parse(dateStr1), sdf.parse(dateStr2)), hotel: hotel1)
+			 name: TimeInterval.buildName(sdf.parse(dateStr1), sdf.parse(dateStr2)), hotel: hotel1, bus: new Bus().save())
 		timeInterval1.save(flush: true)
 		def timeInterval2 = new TimeInterval(startDate: sdf.parse(dateStr3), endDate: sdf.parse(dateStr4),
-			name: TimeInterval.buildName(sdf.parse(dateStr3), sdf.parse(dateStr4)), hotel: hotel1)
+			name: TimeInterval.buildName(sdf.parse(dateStr3), sdf.parse(dateStr4)), hotel: hotel1, bus: new Bus().save())
 		timeInterval2.save(flush: true)
 		def timeInterval3 = new TimeInterval(startDate: sdf.parse(dateStr5), endDate: sdf.parse(dateStr6),
-			name: TimeInterval.buildName(sdf.parse(dateStr5), sdf.parse(dateStr6)), hotel: hotel1)
+			name: TimeInterval.buildName(sdf.parse(dateStr5), sdf.parse(dateStr6)), hotel: hotel1, bus: new Bus().save())
 		timeInterval3.save(flush: true)
 
 		def BR1 = new BookingRequest(timeInterval: timeInterval1, name: 'BR1', numberTourist: 1, bedsInRoom: 2,

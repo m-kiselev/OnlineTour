@@ -13,6 +13,10 @@ class TimeIntervalController {
 		render (TimeIntervalService.getInfo(params) as JSON)
 	}
 
+	def getAvailableSeats(params) {
+		render (TimeIntervalService.getAvailableSeats(params) as JSON)
+	}
+
 	def addTimeInterval() {
 		render (TimeIntervalService.addTimeInterval(params) as JSON)
 	}

@@ -55,7 +55,9 @@ class BookingRequestService {
 			// coast
 			coast     : br.coast,
 			commission: br.commission,
-			finalCoast: br.finalCoast
+			finalCoast: br.finalCoast,
+			
+			busSeats  : br.busSeats as String
 		]
 	}
 
@@ -87,6 +89,10 @@ class BookingRequestService {
 		br.coast              = params.coast      as Integer
 		br.commission         = params.commission as Integer
 		br.finalCoast         = params.finalCoast as Integer
+		
+		def newSeats = params.busSeats as Set<String>
+		br.timeInterval.bus.updateSeats(br.busSeats, newSeats)
+		br.busSeats = newSeats
 	}
 
 	def addBookingRequest(params) {

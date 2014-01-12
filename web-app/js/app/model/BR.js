@@ -25,7 +25,8 @@ Ext.define('app.model.BR', {
         {name: 'note',               type: 'string'},
         {name: 'coast',              type: 'int'},
         {name: 'commission',         type: 'int'},
-        {name: 'finalCoast',         type: 'int'}
+        {name: 'finalCoast',         type: 'int'},
+        {name: 'busSeats'}
     ],
     proxy: {
         type: 'rest',

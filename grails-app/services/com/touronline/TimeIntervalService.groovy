@@ -29,6 +29,13 @@ class TimeIntervalService {
 		]
 	}
 
+	def getAvailableSeats(params) {
+		TimeInterval ti = TimeInterval.get(params.get("tiId"))
+		return ti.bus.getAvailableSeats().sort().collect() {[
+			name: it
+		]}
+	}
+
 	def setParameters(TimeInterval ti, params) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy")
 		ti.startDate = sdf.parse(params.startDate)

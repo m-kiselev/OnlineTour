@@ -8,7 +8,7 @@ Ext.define('app.controller.MainController', {
              'TourBrowser', 'TourWindow', 'HotelWindow', 'TimesWindow', 'BRWindow',
              'CentralPanel', 'CentralTree', 'DescriptionPanel', 'PersonGrid'],
     stores: ['Users', 'Tours', 'Hotels', 'Times', 'EnumTourPriority', 'EnumFeeding',
-             'EnumRoomCategory', 'CentralTreeStore', 'Persons'],
+             'EnumRoomCategory', 'CentralTreeStore', 'Persons', 'BusSeats'],
     models: ['User', 'Tour', 'Hotel', 'TI', 'BR', 'CentralTreeModel', 'Person'],
     init: function(application) {
         this.control({
