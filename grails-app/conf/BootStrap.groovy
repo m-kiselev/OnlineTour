@@ -9,8 +9,10 @@ import com.touronline.TourPriority;
 import com.touronline.User
 import com.touronline.UserInfo
 import com.touronline.UserRole
+import com.touronline.Person
 
 import java.text.SimpleDateFormat
+import java.util.Date;
 
 class BootStrap {
 
@@ -96,6 +98,13 @@ class BootStrap {
 			finalCoast: 111, requestCreator: adminUser)
 		BR3.save(flush: true)
 		
+		def pers1 = new Person(fio: "fio1", birthDate: new Date(), passportData: 'passportData1', phone: 'phone1',
+			email: 'email1@mail.ru', bookingRequest: BR1)
+		pers1.save(flush: true)
+		def pers2 = new Person(fio: "fio2", birthDate: new Date(), passportData: 'passportData2', phone: 'phone2',
+				email: 'email@mail.ru', bookingRequest: BR1)
+		pers2.save(flush: true)
+		
 		assert User.count() == 2
 		assert Role.count() == 2
 		assert UserRole.count() == 2
@@ -103,6 +112,7 @@ class BootStrap {
 		assert Hotel.count() == 3
 		assert TimeInterval.count() == 3
 		assert BookingRequest.count() == 3
+		assert Person.count() == 2
     }
 
     def destroy = {

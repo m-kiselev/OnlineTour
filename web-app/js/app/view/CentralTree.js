@@ -86,7 +86,6 @@ Ext.define('app.view.CentralTree', {
                 align: 'center',
                 icon: 'images/edit.png',
                 handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
-                    console.log(record.data);
                     var recordType = record.get('type');
                     var nodeId     = record.get('nodeId');
                     addEditItem(false, recordType, nodeId);
@@ -123,8 +122,6 @@ function addEditItem(isAdd, type, itemId) {
         windowName = 'app.view.BRWindow';
     }
 
-    var Model = Ext.ModelManager.getModel(modelName);
-
     var win = Ext.create(windowName);
     var form = win.down('form').getForm();
     form.findField('tourId').setValue(getTourId());
@@ -132,6 +129,9 @@ function addEditItem(isAdd, type, itemId) {
     if (!isAdd) {
         win.setTitle(winTitle);
         win.action = 'edit';
+        win.brId = itemId;
+
+        var Model = Ext.ModelManager.getModel(modelName);
 
         Model.load(itemId, {
             success: function(item) {

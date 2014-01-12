@@ -75,7 +75,7 @@ class BookingRequestService {
 		br.feeding            = Feeding.fromString(params.feeding)
 		br.numberTourist      = params.numberTourist  as Integer
 		br.bedsInRoom         = params.bedsInRoom     as Integer
-		br.additionalBeds     = params.additionalBeds as Integer
+		br.additionalBeds     = params.additionalBeds ? params.additionalBeds as Integer : 0
 		br.additionalBed      = params.additionalBed == 'on' ? true : false
 		br.excursions         = params.excursions    == 'on' ? true : false
 		br.insurance          = params.insurance     == 'on' ? true : false
@@ -98,7 +98,7 @@ class BookingRequestService {
 			if (!br.save()){
 				msg = ['success': false, 'message': 'Заяка не сохранена!'];
 			} else {
-				msg = ['success': true];
+				msg = ['success': true, id: br.id];
 			}
 		} catch (Exception e) {
 			msg = ['success': false, 'message': 'Error: ' + e.message]
@@ -115,7 +115,7 @@ class BookingRequestService {
 			if (!br.save()){
 				msg = ['success': false, 'message': 'Заяка не сохранена!'];
 			} else {
-				msg = ['success': true];
+				msg = ['success': true, id: br.id];
 			}
 		} catch (Exception e) {
 			msg = ['success': false, 'message': 'Error: ' + e.message]

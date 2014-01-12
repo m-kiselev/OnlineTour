@@ -3,6 +3,9 @@
  */
 var rootDir = '/OnlineTour/static/js/app';
 Ext.Loader.loadScript(rootDir + '/extra/Utils.js');
+Ext.Loader.loadScript(rootDir + '/extra/PlainWriter.js');
+
+//Ext.require(['app.extra.PlainWriter']);
 
 Ext.application({
     name: 'app',

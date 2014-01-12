@@ -146,6 +146,11 @@ Ext.define('app.view.BRWindow', {
                         }]
                     },
                     {
+                    	title: 'Информация о туристах',
+                    	xtype:'fieldset',
+                    	items: [{xtype: 'persongrid'}]
+                    },
+                    {
                         title: 'Стоимость',
                         xtype:'fieldset',
                         items: [{
@@ -199,6 +204,14 @@ function handleAddEditBR(btn) {
         success : function(response, opts) {
             var resp = Ext.decode(response.responseText);
             if (resp.success == true) {
+            	// Save persons for BR
+            	var personStore = win.down('persongrid').getStore();
+            	personStore.each(function(record) {
+            		record.set('brId', resp.id);
+            	});
+            	personStore.sync();
+
+            	// Update centraltree panel
                 var centraltree = Ext.ComponentQuery.query('#centraltree')[0];
                 if (win.action == 'edit') {
                 	console.log(addParams.origName);
